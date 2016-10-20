@@ -7,7 +7,8 @@ import requests
 import ssl
 import subprocess
 import os
-import urllib.request
+import urllib
+import urllib2
 import time
 
 def extract_value(begin, key, end, s):
