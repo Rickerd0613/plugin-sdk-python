@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		ca-certificates \
 		libsqlite3-0 \
 		libssl1.0.0 \
+		git \
 	&& rm -rf /var/lib/apt/lists/*
 
 # gpg: key 18ADD4FF: public key "Benjamin Peterson <benjamin@python.org>" imported

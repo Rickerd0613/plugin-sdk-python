@@ -12,6 +12,7 @@ build:
 	python setup.py build 
 
 install:
+	pip install git+https://github.com/mbroomfield-r7/python-jsonschema-objects.git@fix/support-null-type
 	python setup.py install
 
 test:
