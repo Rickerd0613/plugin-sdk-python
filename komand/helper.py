@@ -214,7 +214,8 @@ def open_url(url, timeout=None, verify=True, data=None, **kwargs):
       req.add_header(header, kwargs[key])
   try:
     if verify:
-      urlobj = urllib2.urlopen(req, timeout=timeout, data=data)
+      ctx = ssl.create_default_context(cafile=os.environ['SSL_CERT_FILE'])
+      urlobj = urllib2.urlopen(req, timeout=timeout, context=ctx, data=data)
     else:
       ctx = ssl.create_default_context()
       ctx.check_hostname = False
@@ -243,7 +244,8 @@ def check_url(url):
     '''Try Range request as secondary option'''
     hrange = {'Range':'bytes=0-2'}
     req = urllib2.Request(url,headers=hrange)
-    resp = urllib2.urlopen(req)
+    ctx = ssl.create_default_context(cafile=os.environ['SSL_CERT_FILE'])
+    resp = urllib2.urlopen(req, context=ctx)
     if resp.code >= 200 and resp.code <= 299:
       return True
 

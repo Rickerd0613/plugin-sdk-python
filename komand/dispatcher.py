@@ -2,6 +2,7 @@ import message
 import sys
 import logging
 import requests
+import os
 
 class Stdout(object):
     """ stdout dispatcher """
@@ -26,5 +27,14 @@ class Http(object):
         logging.info('Using dispatcher config: %s', config)
 
     def write(self, msg):
-        r = requests.post(self.url, json=msg)
-        logging.info('POST %s returned %s', self.url, r.content)
+        try:
+            r = requests.post(self.url,
+                              json=msg,
+                              verify=os.environ['SSL_CERT_FILE'])
+            logging.info('POST %s returned %s', self.url, r.content)
+        except Exception as ex:
+            logging.error('ERROR: POST to %s failed. CA bundle path: %s Exception %s',
+                          self.url,
+                          os.environ['SSL_CERT_FILE'],
+                          str(ex))
+
