@@ -40,10 +40,10 @@ def where():
             # to do their own verifications against the bundle.
             return env_var
         else:
-            logging.warn('certifi.where(): Using old certifi value %s', old_certifi_value)
+            logging.warning('certifi.where(): Using old certifi value %s', old_certifi_value)
             return old_certifi_value
     except Exception as ex:
-        logging.warn('certifi.where(): Using old certifi value %s', old_certifi_value)
+        logging.warning('certifi.where(): Using old certifi value %s', old_certifi_value)
         return old_certifi_value
 
 
