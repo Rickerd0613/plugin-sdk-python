@@ -45,10 +45,15 @@ class Task(object):
             self._setup(True)
             args = inspect.getargspec(self.action.test).args
 
+            # Add input params to test function
+            params = {}
+            if self.action.input.parameters:
+                params = self.action.input.parameters
+
             if len(args) == 1:
-                output = self.action.test()
+                output = self.action.test(params)
             else:
-                output = self.action.test({})
+                output = self.action.test(params)
 
             schema = self.action.output
     
